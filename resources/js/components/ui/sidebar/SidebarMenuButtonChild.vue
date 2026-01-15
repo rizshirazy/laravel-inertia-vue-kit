@@ -6,6 +6,7 @@ import { Primitive } from "reka-ui"
 import { cn } from "@/lib/utils"
 import { sidebarMenuButtonVariants } from "."
 
+
 export interface SidebarMenuButtonProps extends PrimitiveProps {
   variant?: SidebarMenuButtonVariants["variant"]
   size?: SidebarMenuButtonVariants["size"]

@@ -7,6 +7,7 @@
 
         @vite(['resources/js/app.ts'])
         @inertiaHead
+        @routes
     </head>
 
     <body>

@@ -1,22 +1,27 @@
 <script setup lang="ts">
-import { AppSidebar, DarkModeToggle, AvatarDropdown } from "@/components/index";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar, DarkModeToggle, AvatarDropdown, AppHeader } from "@/components/index";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { useHeader } from "@/composables/useHeader";
+
+const { state } = useHeader();
 </script>
 
 <template>
     <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-            <!-- Header with sidebar trigger -->
-            <header class="flex h-16 shrink-0 items-center justify-between border-b px-4">
-                <div class="flex items-center gap-2">
-                    <SidebarTrigger class="-ml-1" />
-                </div>
-                <div class="flex items-center gap-2">
+            <!-- Consolidated Header -->
+            <AppHeader 
+                :title="state.title" 
+                :subtitle="state.subtitle" 
+                :breadcrumbs="state.breadcrumbs"
+            >
+                <template #actions>
                     <DarkModeToggle />
                     <AvatarDropdown name="John Doe" email="john@example.com" />
-                </div>
-            </header>
+                </template>
+            </AppHeader>
+
             <!-- Main content area -->
             <main class="flex-1 p-4">
                 <slot />

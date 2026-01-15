@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Home } from "lucide-vue-next";
+import { Home, LogIn } from "lucide-vue-next";
 import {
     Sidebar,
     SidebarContent,
@@ -10,12 +10,11 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
 // Menu items.
 const items = [
     {
         title: "Dashboard",
-        url: "#",
+        route: "dashboard",
         icon: Home,
     },
 ];
@@ -32,8 +31,8 @@ const items = [
                             v-for="item in items"
                             :key="item.title"
                         >
-                            <SidebarMenuButton as-child :is-active="true">
-                                <a :href="item.url">
+                            <SidebarMenuButton as-child :is-active="route().current(item.route)">
+                                <a :href="route(item.route)">
                                     <component :is="item.icon" />
                                     <span>{{ item.title }}</span>
                                 </a>
