@@ -29,13 +29,13 @@ class AuthenticatedSessionController extends Controller
             $request->boolean('remember')
         );
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard'))->with('success', 'Logged in successfully.');
     }
 
     public function destroy(LogoutUserAction $logoutUserAction): RedirectResponse
     {
         $logoutUserAction->execute();
 
-        return redirect()->to('/');
+        return redirect()->to('/login')->with('success', 'Logged out successfully.');
     }
 }

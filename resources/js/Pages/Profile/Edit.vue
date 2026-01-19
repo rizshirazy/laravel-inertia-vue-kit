@@ -81,6 +81,10 @@ onMounted(() => {
     setHeader({
         title: 'Edit Profile',
         subtitle: "Update your account's profile information and password.",
+        breadcrumbs: [
+            { label: 'Profile'},
+            { label: 'Edit' }
+        ],
     });
 });
 </script>
@@ -183,16 +187,6 @@ onMounted(() => {
                         <Button type="submit" :disabled="profileForm.processing">
                             Save Profile
                         </Button>
-
-                        <Transition
-                            enter-from-class="opacity-0"
-                            leave-to-class="opacity-0"
-                            class="transition ease-in-out"
-                        >
-                            <p v-if="profileForm.recentlySuccessful" class="text-sm text-muted-foreground font-medium">
-                                Profile updated successfully.
-                            </p>
-                        </Transition>
                     </div>
                 </form>
             </CardContent>
@@ -258,16 +252,6 @@ onMounted(() => {
                         <Button type="submit" :disabled="passwordForm.processing">
                             Update Password
                         </Button>
-
-                        <Transition
-                            enter-from-class="opacity-0"
-                            leave-to-class="opacity-0"
-                            class="transition ease-in-out"
-                        >
-                            <p v-if="passwordForm.recentlySuccessful" class="text-sm text-muted-foreground font-medium">
-                                Password updated successfully.
-                            </p>
-                        </Transition>
                     </div>
                 </form>
             </CardContent>

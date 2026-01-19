@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import { useFlash } from "@/composables/useFlash";
+import Toaster from "@/components/ui/sonner/Sonner.vue";
+
+useFlash();
 </script>
 
 <template>
@@ -22,6 +26,9 @@ import { Head } from '@inertiajs/vue3';
             </div>
         </div>
     </div>
+    <Teleport to="body">
+        <Toaster position="top-center" rich-colors />
+    </Teleport>
 </template>
 
 <style scoped>

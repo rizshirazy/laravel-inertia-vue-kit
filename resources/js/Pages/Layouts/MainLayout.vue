@@ -4,6 +4,8 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { useHeader } from "@/composables/useHeader";
 import { usePage, router } from "@inertiajs/vue3";
 import { computed } from "vue";
+import { useFlash } from "@/composables/useFlash";
+import Toaster from "@/components/ui/sonner/Sonner.vue";
 
 interface User {
     id: number;
@@ -16,11 +18,19 @@ interface PageProps extends Record<string, any> {
     auth: {
         user: User | null;
     };
+    flash: {
+        success: string | null;
+        error: string | null;
+        info: string | null;
+        warning: string | null;
+    };
 }
 
 const { state } = useHeader();
 const page = usePage<PageProps>();
 const user = computed(() => page.props.auth?.user);
+
+useFlash();
 
 const handleLogout = () => {
     router.post(route('logout'));
@@ -55,5 +65,8 @@ const handleLogout = () => {
             </main>
         </SidebarInset>
     </SidebarProvider>
+    <Teleport to="body">
+        <Toaster position="top-center" rich-colors />
+    </Teleport>
 </template>
 
