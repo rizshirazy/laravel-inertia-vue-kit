@@ -2,8 +2,29 @@
 import { AppSidebar, DarkModeToggle, AvatarDropdown, AppHeader } from "@/components/index";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { useHeader } from "@/composables/useHeader";
+import { usePage, router } from "@inertiajs/vue3";
+import { computed } from "vue";
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    profile_picture: string | null;
+}
+
+interface PageProps extends Record<string, any> {
+    auth: {
+        user: User | null;
+    };
+}
 
 const { state } = useHeader();
+const page = usePage<PageProps>();
+const user = computed(() => page.props.auth?.user);
+
+const handleLogout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
@@ -18,7 +39,13 @@ const { state } = useHeader();
             >
                 <template #actions>
                     <DarkModeToggle />
-                    <AvatarDropdown name="John Doe" email="john@example.com" />
+                    <AvatarDropdown 
+                        v-if="user"
+                        :name="user.name" 
+                        :email="user.email" 
+                        :avatar-url="user.profile_picture"
+                        @logout="handleLogout"
+                    />
                 </template>
             </AppHeader>
 

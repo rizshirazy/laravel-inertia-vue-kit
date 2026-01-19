@@ -51,7 +51,7 @@ const submit = () => {
                     <Input
                         id="name"
                         type="text"
-                        placeholder="John Doe"
+                        placeholder="Enter your name"
                         v-model="form.name"
                         required
                         autofocus
@@ -68,7 +68,7 @@ const submit = () => {
                     <Input
                         id="email"
                         type="email"
-                        placeholder="name@example.com"
+                        placeholder="Enter your email"
                         v-model="form.email"
                         required
                         autocomplete="username"
@@ -79,7 +79,6 @@ const submit = () => {
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
                         <Label for="password">Password</Label>
                         <Input
@@ -107,7 +106,6 @@ const submit = () => {
                             {{ form.errors.password || form.errors.password_confirmation }}
                         </p>
                     </div>
-                </div>
 
                 <Button type="submit" class="w-full" :disabled="form.processing">
                     <template v-if="form.processing">Creating account...</template>

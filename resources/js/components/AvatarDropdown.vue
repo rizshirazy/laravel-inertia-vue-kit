@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { LogOut, Settings, User } from 'lucide-vue-next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { router } from '@inertiajs/vue3'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,8 +15,9 @@ import {
 defineProps<{
     name?: string
     email?: string
-    avatarUrl?: string
+    avatarUrl?: string | null
 }>()
+const emit = defineEmits(['logout'])
 </script>
 
 <template>
@@ -23,7 +25,7 @@ defineProps<{
         <DropdownMenuTrigger as-child>
             <button class="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
                 <Avatar class="h-8 w-8 cursor-pointer">
-                    <AvatarImage :src="avatarUrl" :alt="name || 'User'" />
+                    <AvatarImage :src="avatarUrl || ''" :alt="name || 'User'" />
                     <AvatarFallback class="bg-primary text-primary-foreground">
                         {{ (name || 'U').charAt(0).toUpperCase() }}
                     </AvatarFallback>
@@ -39,7 +41,7 @@ defineProps<{
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem @click="router.visit(route('profile.edit'))">
                     <User class="mr-2 h-4 w-4" />
                     <span>Profile</span>
                 </DropdownMenuItem>
@@ -49,7 +51,10 @@ defineProps<{
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem class="text-destructive focus:text-destructive">
+            <DropdownMenuItem 
+                class="text-destructive focus:text-destructive"
+                @click="emit('logout')"
+            >
                 <LogOut class="mr-2 h-4 w-4" />
                 <span>Log out</span>
             </DropdownMenuItem>
