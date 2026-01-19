@@ -27,7 +27,7 @@ useFlash();
         </div>
     </div>
     <Teleport to="body">
-        <Toaster position="top-center" rich-colors />
+        <Toaster position="top-right" rich-colors />
     </Teleport>
 </template>
 

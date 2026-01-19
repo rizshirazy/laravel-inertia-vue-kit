@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import { AppSidebar, DarkModeToggle, AvatarDropdown, AppHeader } from "@/components/index";
+import { AppSidebar, DarkModeToggle, AppHeader } from "@/components/index";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { useHeader } from "@/composables/useHeader";
-import { usePage, router } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
 import { useFlash } from "@/composables/useFlash";
 import Toaster from "@/components/ui/sonner/Sonner.vue";
 
-interface User {
-    id: number;
-    name: string;
-    email: string;
-    profile_picture: string | null;
-}
-
 interface PageProps extends Record<string, any> {
     auth: {
-        user: User | null;
+        user: any;
     };
     flash: {
         success: string | null;
@@ -28,13 +20,8 @@ interface PageProps extends Record<string, any> {
 
 const { state } = useHeader();
 const page = usePage<PageProps>();
-const user = computed(() => page.props.auth?.user);
 
 useFlash();
-
-const handleLogout = () => {
-    router.post(route('logout'));
-};
 </script>
 
 <template>
@@ -49,13 +36,6 @@ const handleLogout = () => {
             >
                 <template #actions>
                     <DarkModeToggle />
-                    <AvatarDropdown 
-                        v-if="user"
-                        :name="user.name" 
-                        :email="user.email" 
-                        :avatar-url="user.profile_picture"
-                        @logout="handleLogout"
-                    />
                 </template>
             </AppHeader>
 

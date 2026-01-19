@@ -92,7 +92,7 @@ onMounted(() => {
 <template>
     <Head title="Edit Profile" />
 
-    <div class="w-full space-y-8 py-8">
+    <div class="w-full space-y-6">
         <!-- Profile Information Card -->
         <Card>
             <CardHeader>
